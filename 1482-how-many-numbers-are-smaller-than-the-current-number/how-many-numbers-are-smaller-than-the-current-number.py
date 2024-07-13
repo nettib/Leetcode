@@ -4,8 +4,8 @@ class Solution:
         for i in range(len(nums)):
             target=nums[i]
             count=0
-            for j in range(len(nums)):
-                if nums[j]<target:
+            for j in nums:
+                if j<target:
                     count+=1
             output.append(count)
         return output
