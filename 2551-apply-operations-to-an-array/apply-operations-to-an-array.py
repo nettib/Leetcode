@@ -4,8 +4,13 @@ class Solution:
                 if nums[i] == nums[i + 1]:
                     nums[i] = nums[i] * 2
                     nums[i + 1] = 0
-            for j in nums:
-                if j==0:
-                    nums.remove(j)
-                    nums.append(j)
-            return nums
+            nonZero=[]
+            zero=0
+            for itm in nums:
+                if itm!=0:
+                    nonZero.append(itm)
+                else:
+                    zero+=1
+            nonZero.extend([0]*zero)
+            return nonZero
+            
