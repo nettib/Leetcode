@@ -1,6 +1,6 @@
 class Solution:
     def longestNiceSubstring(self, s: str) -> str:
-        @cache
+        # @cache
         def isNiceSubString(substring):
             charSet = set(substring)
             for char in substring:
