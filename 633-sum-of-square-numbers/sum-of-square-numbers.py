@@ -1,18 +1,17 @@
 import math
 class Solution:
-  def judgeSquareSum(self, c: int) -> bool:
-    l = 0
-    r = int(math.sqrt(c))  
-    while l <= r:
-        current_sum = l**2 + r**2
-        if current_sum == c:
-            return True
-        elif current_sum < c:
-            l += 1
-        else:
-            r -= 1
-    
-    return False
+    def judgeSquareSum(self, c: int) -> bool:
+        l=0
+        r=int(math.sqrt(c))
+        while l<=r:
+            current_sum = l**2 + r**2
+            if current_sum == c:
+                return True
+            elif current_sum < c:
+                l+=1
+            else:
+                r-=1
+        return False
         
 
 
