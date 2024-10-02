@@ -4,7 +4,6 @@ class Solution:
             return 0
         arr = []
         longest = 1
-        l = 0
         for r in range(0, len(s)):
             while s[r] in arr:
                 if len(arr) != 0:
