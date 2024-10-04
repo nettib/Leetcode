@@ -8,6 +8,5 @@ class Solution:
             while cost > maxCost:
                 cost-=abs(ord(s[left]) - ord(t[left]))
                 left+=1
-            # cost += abs(ord(s[right]) - ord(t[right]))
             mx = max(mx,right - left + 1)
         return mx
