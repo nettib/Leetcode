@@ -1,33 +1,65 @@
 class Solution:
     def findAnagrams(self, s: str, p: str) -> List[int]:
-        def createDic(word):
-            freq={}
+        def frequency(word):
+            freq = {}
             for char in word:
                 if char in freq:
                     freq[char]+=1
                 else:
-                    freq[char]=1
+                    freq[char] = 1
             return freq
-        p_freq = createDic(p)
+        p_freq = frequency(p)
         s_freq = {}
-        res = []
-
-        for i in range(len(s)):
-            if s[i] in s_freq:
-                s_freq[s[i]]+=1
+        ans = []
+        l = 0
+        for r in range(len(s)):
+            if s[r] in s_freq:
+                s_freq[s[r]]+=1
             else:
-                s_freq[s[i]]=1
+                s_freq[s[r]] = 1
 
-            if i >= len(p):
-                left = s[i-len(p)]
-                if s_freq[left] == 1:
-                    del s_freq[left]
+            if r >= len(p) - 1:
+                if s_freq == p_freq:
+                    ans.append(l)
+                if s_freq[s[l]] == 1:
+                    del s_freq[s[l]]
                 else:
-                    s_freq[left]-=1
+                    s_freq[s[l]]-=1
+                l+=1
 
-            if s_freq == p_freq:
-                res.append(i - len(p) + 1)
-        return res
+        return ans
+
+
+
+
+        # def createDic(word):
+        #     freq={}
+        #     for char in word:
+        #         if char in freq:
+        #             freq[char]+=1
+        #         else:
+        #             freq[char]=1
+        #     return freq
+        # p_freq = createDic(p)
+        # s_freq = {}
+        # res = []
+
+        # for i in range(len(s)):
+        #     if s[i] in s_freq:
+        #         s_freq[s[i]]+=1
+        #     else:
+        #         s_freq[s[i]]=1
+
+        #     if i >= len(p):
+        #         left = s[i-len(p)]
+        #         if s_freq[left] == 1:
+        #             del s_freq[left]
+        #         else:
+        #             s_freq[left]-=1
+
+        #     if s_freq == p_freq:
+        #         res.append(i - len(p) + 1)
+        # return res
 
         
         
