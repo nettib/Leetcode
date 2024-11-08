@@ -16,10 +16,10 @@ class Solution:
             nums1[k] = nums2[right]
             right-=1
             k-=1
-        while left >= 0:
-            nums1[k] = nums1[left]
-            left-=1
-            k-=1
+        # while left >= 0:
+        #     nums1[k] = nums1[left]
+        #     left-=1
+        #     k-=1
 
 
 
