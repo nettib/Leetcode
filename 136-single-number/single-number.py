@@ -1,14 +1,15 @@
 class Solution:
     def singleNumber(self, nums: List[int]) -> int:
-        container = {}
-        for num in nums:
-            if num in container:
-                container[num]+=1
+        nums.sort()
+        l = 0
+        r = l + 1
+        while r < len(nums):
+            if nums[l] == nums[r]:
+                l = r + 1
+                r = l + 1
             else:
-                container[num] = 1
-        for num in container:
-            if container[num] == 1:
-                return num
+                return nums[l]
+        return nums[len(nums) - 1]
         
 
         
