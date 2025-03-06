@@ -6,11 +6,10 @@ class Solution:
                 freq[nums[i]] = 1
             else:
                 freq[nums[i]] += 1
-        for i in range(len(nums)):
-            for j in range(len(nums) - i - 1):
-                if freq[nums[j]] > freq[nums[j+1]]:
-                    nums[j], nums[j+1] = nums[j+1], nums[j]
-                elif freq[nums[j]] == freq[nums[j+1]]:
-                    if nums[j] < nums[j+1]:
-                        nums[j], nums[j+1] = nums[j+1], nums[j]
-        return nums
+        
+        def get_sort_key(x):
+            return (freq[x], -x)
+        
+        sorted_nums = sorted(nums, key=get_sort_key)
+    
+        return sorted_nums
