@@ -1,12 +1,12 @@
 class Solution:
     def containsDuplicate(self, nums: List[int]) -> bool:
-        a={}
-        p=False
-        for i in nums:
-            if i not  in a:
-                a[i]=0
+        numsHash = {}
+        for num in nums:
+            if num not in numsHash:
+                numsHash[num] = 1
             else:
-                p=True
-        return p
+                return True
+        return False
+
         
         
