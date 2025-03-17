@@ -26,16 +26,13 @@ class MyHashMap:
         self.hashmap = []
 
     def put(self, key: int, value: int) -> None:
-        isKey = False
         if len(self.hashmap) == 0:
             self.hashmap.append([key, value])
         for i in range(len(self.hashmap)):
             if key == self.hashmap[i][0]:
                 self.hashmap[i][1] = value
-                isKey = True
                 return
-        if not isKey:
-            self.hashmap.append([key, value])
+        self.hashmap.append([key, value])
         # print(self.hashmap)
     def get(self, key: int) -> int:
         for i in range(len(self.hashmap)):
