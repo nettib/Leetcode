@@ -1,17 +1,12 @@
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
+        if len(s) != len(t):
+            return False
         s_hashmap = {}
         t_hashmap = {}
-        for char in s:
-            if char not in s_hashmap:
-                s_hashmap[char] = 1
-            else:
-                s_hashmap[char]+=1
-        for char in t:
-            if char not in t_hashmap:
-                t_hashmap[char] = 1
-            else:
-                t_hashmap[char]+=1
+        for i in range(len(s)):
+           s_hashmap[s[i]] = 1 + s_hashmap.get(s[i], 0)
+           t_hashmap[t[i]] = 1 + t_hashmap.get(t[i], 0) 
         if s_hashmap == t_hashmap:
             return True
-        return False 
+        return False
