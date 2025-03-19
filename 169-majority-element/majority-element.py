@@ -1,12 +1,8 @@
-import math
 class Solution:
     def majorityElement(self, nums: List[int]) -> int:
-        count={}
+        ans = count = 0
         for num in nums:
-            if num in count:
-                count[num]+=1
-            else:
-                count[num]=1
-        for k in count.keys():
-            if count[k]>len(nums)//2:
-                return k
+            if count == 0:
+                ans = num
+            count+=(1 if ans == num else -1)
+        return ans
