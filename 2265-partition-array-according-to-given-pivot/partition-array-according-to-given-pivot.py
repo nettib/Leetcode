@@ -11,14 +11,8 @@ class Solution:
             if nums[j] > pivot:
                 res[j1] = nums[j]
                 j1 -= 1
-        print(i1, j1)
-        if i1 == j1:
-            if res[i1] == 0:
-                res[i1] = pivot
-            return res
-        else:
-            for k in range(i1, j1 + 1):
-                res[k] = pivot
+        for k in range(i1, j1 + 1):
+            res[k] = pivot
         
         return res
 
