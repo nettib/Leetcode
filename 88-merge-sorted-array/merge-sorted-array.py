@@ -6,23 +6,23 @@ class Solution:
         if m == 0:
             for i in range(n):
                 nums1[i] = nums2[i]
-        if n != 0:
-            l, r = m - 1, n - 1
-            position = (m + n) - 1
-            while l >= 0 and r >= 0:
-                if nums1[l] >= nums2[r]:
-                    nums1[position] = nums1[l]
-                    l -= 1
+        else:
+            p1 = m - 1
+            p2 = n - 1
+            track = len(nums1) - 1
+            while p1 >= 0 and p2 >= 0:
+                if nums2[p2] >= nums1[p1]:
+                    nums1[track] = nums2[p2]
+                    track -= 1
+                    p2 -= 1
                 else:
-                    nums1[position] = nums2[r]
-                    r -= 1
-                position -= 1
-            
-            while r >= 0:
-                nums1[position] = nums2[r]
-                r -= 1
-                position -= 1
+                    nums1[track] = nums1[p1]
+                    track -= 1
+                    p1 -= 1
+            while p2 >= 0:
+                nums1[track] = nums2[p2]
+                track -= 1
+                p2 -= 1
+        
 
 
-
-            
