@@ -1,16 +1,20 @@
 class Solution:
     def maxVowels(self, s: str, k: int) -> int:
-        current = 0
         vowels = "aeiou"
+        count = 0
         for i in range(k):
             if s[i] in vowels:
-                current += 1
-        mx_vowels = current
-        for i in range(k, len(s)):
-            if s[i - k] in vowels:
-                current -= 1
-            if s[i] in vowels:
-                current += 1
-            mx_vowels = max(mx_vowels, current)
+                count += 1
+        mx_vowel = count
+        l = 0
+        for r in range(k, len(s)):
+            if s[r] in vowels:
+                count += 1
+            if s[l] in vowels:
+                count -= 1
+            l += 1
+            mx_vowel = max(mx_vowel, count)
+        return mx_vowel
 
-        return mx_vowels
+
+        
