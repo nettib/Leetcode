@@ -6,8 +6,4 @@ class Solution:
             l += 1
             r -= 1
         
-            
-        """
-        Do not return anything, modify s in-place instead.
-        """
         
