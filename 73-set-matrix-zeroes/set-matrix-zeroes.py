@@ -3,16 +3,26 @@ class Solution:
         """
         Do not return anything, modify matrix in-place instead.
         """
-        zero_rows = set()
-        zero_columns = set()
+
+        rows = [1] * len(matrix)
+        columns = [1] * len(matrix[0])
 
         for row in range(len(matrix)):
             for column in range(len(matrix[row])):
                 if matrix[row][column] == 0:
-                    zero_rows.add(row)
-                    zero_columns.add(column)
+                    rows[row] = 0
+                    columns[column] = 0
 
         for row in range(len(matrix)):
-            for column in range(len(matrix[row])):
-                if row in zero_rows or column in zero_columns:
+            if rows[row] == 0:
+                for column in range(len(matrix[row])):
                     matrix[row][column] = 0
+            
+        for row in range(len(matrix)):
+            for column in range(len(matrix[row])):
+                if columns[column] == 0:
+                    matrix[row][column] = 0
+
+
+
+        
