@@ -1,22 +1,17 @@
 class Solution:
     def dividePlayers(self, skill: List[int]) -> int:
         skill.sort()
-        com=0
-        chem=0
-        left=0
-        right=len(skill)-1
-        if len(skill)==2:
-            return skill[left]*skill[right]
-        else:
-            com=skill[left]+skill[right]
-            while left<right:
-                if skill[left]+skill[right]==com:
-                    chem+=(skill[left]*skill[right])
-                    left+=1
-                    right-=1
-                else:
-                    return -1
+        check_skill = 0
+        chem = 0
+        l, r = 0, len(skill) - 1
+        while l < r:
+            team_skill = skill[l] + skill[r]
+            if check_skill != 0 and team_skill != check_skill:
+                return -1
+            else:
+                chem += skill[l] * skill[r]
+                check_skill = team_skill
+            l += 1
+            r -= 1
+        
         return chem
-
-            
-
