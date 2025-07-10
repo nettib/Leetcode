@@ -3,17 +3,8 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        if k == 0:
-            return nums
-        k = k % len(nums)
-        l, r = 0, len(nums) - 1
-        while l < r:
-            nums[l], nums[r] = nums[r], nums[l]
-            l += 1
-            r -= 1
+        k %= len(nums)
+        nums[:] = nums[::-1]
         nums[:k] = nums[:k][::-1]
         nums[k:] = nums[k:][::-1]
-        return nums
-
-
         
