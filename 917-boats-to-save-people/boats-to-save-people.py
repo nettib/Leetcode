@@ -9,11 +9,8 @@ class Solution:
                 return boat
             weight = people[l] + people[r]
             if weight <= limit:
-                boat += 1
                 l += 1
-                r -= 1
-            else:
-                boat += 1
-                r -= 1
+            boat += 1
+            r -= 1
         
         return boat
