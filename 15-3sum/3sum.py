@@ -11,7 +11,7 @@ class Solution:
                     l += 1
                 while l < r and  r != len(nums) - 1 and nums[r] == nums[r + 1]:
                     r -= 1
-                if l > r or l == r:
+                if l == r:
                     break
                 if nums[l] + nums[r] + nums[i] == 0:
                     res.append([nums[i], nums[l], nums[r]])
