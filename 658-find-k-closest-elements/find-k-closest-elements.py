@@ -1,7 +1,5 @@
 class Solution:
     def findClosestElements(self, arr: List[int], k: int, x: int) -> List[int]:
-        res = None
-
         l = 0
         r = k - 1
         for i in range(k, len(arr)):
