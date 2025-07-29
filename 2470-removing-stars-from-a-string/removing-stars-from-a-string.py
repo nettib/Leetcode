@@ -4,8 +4,7 @@ class Solution:
 
         for char in s:
             if char == "*":
-                if len(stack) != 0:
-                    stack.pop()
+                stack.pop()
             else:
                 stack.append(char)
         
