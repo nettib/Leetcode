@@ -1,43 +1,20 @@
+import math
 class Solution:
-   def evalRPN(self, tokens: List[str]) -> int:
-    stack = []
-    for i in range(len(tokens)):
-        if tokens[i] not in "+-*/":
-            stack.append(int(tokens[i]))
-        elif tokens[i] == "+":
-            if len(stack) > 1:
-                a = stack[-2] + stack[-1]
-                del stack[len(stack) - 2:len(stack)]
-                stack.append(int(a))
-        elif tokens[i] == "-":
-            if len(stack) > 1:
-                a = stack[-2] - stack[-1]
-                del stack[len(stack) - 2:len(stack)]
-                stack.append(int(a))
-        elif tokens[i] == "*":
-            if len(stack) > 1:
-                a = stack[-2] * stack[-1]
-                del stack[len(stack) - 2:len(stack)]
-                stack.append(int(a))
-        else:
-            if len(stack) > 1:
-                a = stack[-2] / stack[-1]
-                del stack[len(stack) - 2:len(stack)]
-                stack.append(int(a))
-    return stack[0]
+    def evalRPN(self, tokens: List[str]) -> int:
+        operators = ['+', '-', '*', '/']
+        stack = []
+
+        for char in tokens:
+            val1 = 0
+            val2 = 0
+            if char not in operators:
+                stack.append(int(char))
+            else:
+                val2 = stack.pop()
+                val1 = stack.pop()
+                print(str(val1) + char + str(val2))
+                stack.append(math.trunc(eval(str(val1) + char + str(val2))))
+            
+        return stack[-1]
 
 
-
-    # stack = []
-    # for i in range(len(tokens)):
-    #     if tokens[i] in ['+', '-', '*', '/']:
-    #         b = stack.pop()
-    #         a = stack.pop()
-    #         res = eval(f"{a}{tokens[i]}{b}")
-    #         stack.append(int(res))
-    #     else:
-    #         stack.append(tokens[i])
-    # return int(stack[0])
-
-
-        
