@@ -1,4 +1,3 @@
-import math
 class Solution:
     def evalRPN(self, tokens: List[str]) -> int:
         operators = ['+', '-', '*', '/']
@@ -12,7 +11,7 @@ class Solution:
             else:
                 val2 = stack.pop()
                 val1 = stack.pop()
-                stack.append(str(math.trunc(eval(val1 + char + val2))))
+                stack.append(str(int(eval(val1 + char + val2))))
             
         return int(stack[-1])
 
