@@ -8,13 +8,12 @@ class Solution:
             val1 = 0
             val2 = 0
             if char not in operators:
-                stack.append(int(char))
+                stack.append(char)
             else:
                 val2 = stack.pop()
                 val1 = stack.pop()
-                print(str(val1) + char + str(val2))
-                stack.append(math.trunc(eval(str(val1) + char + str(val2))))
+                stack.append(str(math.trunc(eval(val1 + char + val2))))
             
-        return stack[-1]
+        return int(stack[-1])
 
 
