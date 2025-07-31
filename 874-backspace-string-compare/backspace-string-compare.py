@@ -1,16 +1,18 @@
 class Solution:
     def backspaceCompare(self, s: str, t: str) -> bool:
-        s1 = []
-        t1 = []
-        for i in range(len(s)):
-            if s[i] == "#" and len(s1) != 0:
-                s1.pop()
-            elif s[i] != "#":
-                s1.append(s[i])
-        for i in range(len(t)):
-            if t[i] == "#" and len(t1) != 0:
-                t1.pop()
-            elif t[i] != "#":
-                t1.append(t[i])
+        s_stack = []
+        t_stack = []
+
+        for char in s:
+            if s_stack and char == '#':
+                s_stack.pop()
+            elif char != '#':
+                s_stack.append(char)
+            
+        for char in t:
+            if t_stack and char == '#':
+                t_stack.pop()
+            elif char != '#':
+                t_stack.append(char)
         
-        return s1 == t1
+        return s_stack == t_stack
