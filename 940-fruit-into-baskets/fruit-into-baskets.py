@@ -1,18 +1,18 @@
 class Solution:
     def totalFruit(self, fruits: List[int]) -> int:
-        count = 0
-        basket = {}
+        track = {}
+        max_fruit = 0
 
         l = 0
         for r in range(len(fruits)):
-            basket[fruits[r]] = basket.get(fruits[r], 0) + 1
-                
-            while len(basket) > 2:
-                basket[fruits[l]] -= 1
-                if basket[fruits[l]] == 0:
-                    del basket[fruits[l]]
+            track[fruits[r]] = track.get(fruits[r], 0) + 1
+
+            while len(track) > 2:
+                track[fruits[l]] -= 1
+                if track[fruits[l]] == 0:
+                    del track[fruits[l]]
                 l += 1
             
-            count = max(count, r - l + 1)  
-
-        return count   
+            max_fruit = max(max_fruit, r - l + 1)
+        
+        return max_fruit
