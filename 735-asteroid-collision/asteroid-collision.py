@@ -1,19 +1,19 @@
 class Solution:
     def asteroidCollision(self, asteroids: List[int]) -> List[int]:
-        res = []
+        stack = []
 
         for a in asteroids:
-            while res and a < 0 and res[-1] > 0:
-                diff = a + res[-1]
+            while stack and a < 0 and stack[-1] > 0:
+                diff = a + stack[-1]
+
                 if diff < 0:
-                    res.pop()
+                    stack.pop()
                 elif diff > 0:
                     a = 0
                 else:
                     a = 0
-                    res.pop()
-            
+                    stack.pop()
             if a:
-                res.append(a)
+                stack.append(a)
         
-        return res
+        return stack
