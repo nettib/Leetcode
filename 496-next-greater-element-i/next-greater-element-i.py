@@ -1,14 +1,18 @@
 class Solution:
     def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
-        result = [-1] * len(nums1)
+        idxMap = {}
         stack = []
-        for i in range(len(nums2)):
-            while stack and nums2[i] > nums2[stack[-1]]:
-                index = stack.pop()
-                if nums2[index] in nums1:
-                    result[nums1.index(nums2[index])] = nums2[i]
 
-            stack.append(i)
+        for i, num in enumerate(nums1):
+            idxMap[num] = i
 
-        return result
+        nums1 = [-1] * len(nums1)
+
+        for i in range(0, len(nums2)):
+            while stack and nums2[i] > stack[-1]:
+                nums1[idxMap[stack.pop()]] = nums2[i]
             
+            if nums2[i] in idxMap:
+                stack.append(nums2[i])
+
+        return nums1
