@@ -1,22 +1,15 @@
 class Solution:
     def removeDuplicateLetters(self, s: str) -> str:
-        idxMap = {}
-        track = set()
+        last = { c: i for i, c in enumerate(s) }
         stack = []
+        seen = set()
 
-        for i, char in enumerate(s):
-            idxMap[char] = i
-        
-        for i in range(len(s)):
-            if not stack or (s[i] not in track and stack[-1] < s[i]):
-                stack.append(s[i])
-                track.add(s[i])
-            while stack and s[i] not in track and stack[-1] > s[i] and idxMap[stack[-1]] > i:
-                track.remove(stack[-1])
-                stack.pop()
+        for i, c in enumerate(s):
+            if c in seen:
+                continue
+            while stack and stack[-1] > c and last[stack[-1]] > i:
+                seen.remove(stack.pop())
+            stack.append(c)
+            seen.add(c)
 
-            if s[i] not in track:
-                stack.append(s[i])
-                track.add(s[i])
-        
         return "".join(stack)
