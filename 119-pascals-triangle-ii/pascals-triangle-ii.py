@@ -7,6 +7,6 @@ class Solution:
             for j in range(1, len(nums)):
                 nums[j] = res[j] + res[j - 1]
             nums.append(1)
-            res = nums.copy()
+            res = nums
 
         return res
