@@ -14,7 +14,7 @@ class MyLinkedList:
     def get(self, index: int) -> int:
         count = 0
         curr = self.head
-        while curr != None and count < index:
+        while curr and count < index:
             curr = curr.next
             count += 1
         
@@ -48,11 +48,11 @@ class MyLinkedList:
         else:
             count = 0
             curr = self.head
-            while curr != None and count + 1 < index:
+            while curr and count + 1 < index:
                 curr = curr.next
                 count += 1
 
-            if curr != None:
+            if curr:
                 new_node.next = curr.next
                 curr.next = new_node
             if curr == self.tail:
@@ -60,7 +60,7 @@ class MyLinkedList:
         
 
     def deleteAtIndex(self, index: int) -> None:
-        if index == 0 and self.head != None:
+        if index == 0 and self.head:
             self.head = self.head.next
         else:
             count = 0
@@ -69,9 +69,9 @@ class MyLinkedList:
                 curr = curr.next
                 count += 1
             
-            if curr != None and curr.next == self.tail:
+            if curr and curr.next == self.tail:
                 self.tail = curr
-            if curr != None and curr.next != None:
+            if curr and curr.next:
                 curr.next = curr.next.next
         
 
