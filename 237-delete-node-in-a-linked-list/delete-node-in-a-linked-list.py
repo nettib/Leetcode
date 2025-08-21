@@ -16,7 +16,7 @@ class Solution:
             curr.val = change.val
             curr = curr.next
             change = curr.next
-        curr.val = curr.next.val
+        curr.val = change.val
         curr.next = None
 
 
