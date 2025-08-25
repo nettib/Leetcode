@@ -9,19 +9,15 @@ class Solution:
         t = head
         r = head
 
-        while t and r:
+        while r and r.next:
             t = t.next
-            if r.next:
-                r = r.next.next
-            elif not r.next: 
-                r = None
+            r = r.next.next
             if t == r:
                 break
         
-        if not t or not r:
+        if not r or not r.next:
             return None
-        # print(t.val)
-        # print(r.val)
+        
         t = head
         while t != r:
             t = t.next
