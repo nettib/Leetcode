@@ -4,20 +4,16 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
-
-# CLR
 class Solution:
     def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
         ans = []
 
-        def traverse(node, arr):
+        def preorder(node, ans):
             if node:
-                arr.append(node.val)
-
-                traverse(node.left, arr)
-
-                traverse(node.right, arr)
-
-        traverse(root, ans)
+                ans.append(node.val)
+                preorder(node.left, ans)
+                preorder(node.right, ans)
+        
+        preorder(root, ans)
 
         return ans
