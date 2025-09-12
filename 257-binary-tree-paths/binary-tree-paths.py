@@ -14,7 +14,7 @@ class Solution:
             track += str(node.val) + "->"
             if not node.left and not node.right:
                 path.append(track[:-2])
-                return
+                
             
             dfs(node.left, track)
             dfs(node.right, track)
