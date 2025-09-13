@@ -8,22 +8,20 @@ class Solution:
     def isSameTree(self, node1, node2):
         if not node1 and not node2:
             return True
-        elif not node1 or not node2:
-            return False
-        elif node1.val != node2.val:
-            return False
-        return (self.isSameTree(node1.left, node2.left) and 
-                self.isSameTree(node1.right, node2.right))
+        if node1 and node2 and node1.val == node2.val:
+            return (self.isSameTree(node1.left, node2.left) and
+                    self.isSameTree(node1.right, node2.right))
+        return False
 
     def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
-        if not root:
-            return False
-        
-        if root.val == subRoot.val:
-            if self.isSameTree(root, subRoot):
-                return True
-        
-        return self.isSubtree(root.left, subRoot) or self.isSubtree(root.right, subRoot)
+        if not subRoot: return True
+        if not root: return False
+
+        if self.isSameTree(root, subRoot):
+            return True
+
+        return (self.isSubtree(root.left, subRoot) or
+                self.isSubtree(root.right, subRoot))
 
 
 
