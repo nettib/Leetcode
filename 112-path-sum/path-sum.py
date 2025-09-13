@@ -10,10 +10,11 @@ class Solution:
         def dfs(node, currSum):
             if not node:
                 return False
+            
             currSum += node.val
 
             if not node.left and not node.right:
-                return currSum == targetSum
+                return targetSum == currSum
             
             return (dfs(node.left, currSum) or
                     dfs(node.right, currSum))
