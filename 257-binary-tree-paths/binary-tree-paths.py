@@ -6,19 +6,19 @@
 #         self.right = right
 class Solution:
     def binaryTreePaths(self, root: Optional[TreeNode]) -> List[str]:
-        path = []
+        ans = []
 
         def dfs(node, track):
             if not node:
                 return
             track += str(node.val) + "->"
+
             if not node.left and not node.right:
-                path.append(track[:-2])
-                
-            
+                ans.append(track[:-2])
+        
             dfs(node.left, track)
             dfs(node.right, track)
 
         dfs(root, "")
-        return path
-    
+
+        return ans
