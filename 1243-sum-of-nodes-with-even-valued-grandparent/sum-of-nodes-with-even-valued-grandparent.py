@@ -4,18 +4,24 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+from collections import deque
 class Solution:
     def sumEvenGrandparent(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+        q = deque([[root, None, None]])
         total = 0
-        def dfs(node, parent, grandParent):
-            nonlocal total
-            if not node:
-                return
-            if grandParent and grandParent.val % 2 == 0:
-                total += node.val
-            grandParent = parent
-            parent = node
-            dfs(node.left, parent, grandParent)
-            dfs(node.right, parent, grandParent)
-        dfs(root, None, None)
+
+        while q:
+            node = q.popleft()
+
+            if node[2] and node[2].val % 2 == 0:
+                total += node[0].val
+            
+            if node[0].left:
+                q.append([node[0].left, node[0], node[1]])
+            if node[0].right:
+                q.append([node[0].right, node[0], node[1]])
+        
         return total
+
