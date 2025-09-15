@@ -12,12 +12,7 @@ class Solution:
             if not node:
                 return
 
-            count = 0
-            for val in path:
-                if val > node.val:
-                    count += 1
-            
-            if count == 0:
+            if not path or max(path) <= node.val:
                 res += 1
             
             path.append(node.val)
