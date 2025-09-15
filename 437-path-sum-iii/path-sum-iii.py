@@ -7,28 +7,27 @@
 class Solution:
     def pathSum(self, root: Optional[TreeNode], targetSum: int) -> int:
         res = 0
+        sums = {0: 1}
 
-        def dfs(node, path, total):
+        def dfs(node, total):
             nonlocal res
             if not node:
-                return 
+                return
             
-            path.append(node.val)
             total += node.val
-            if targetSum == total:
-                res += 1
-            currSum = total
 
-            for i in range(len(path) - 1):
-                currSum -= path[i]
-                if currSum == targetSum:
-                    res += 1
+            if (total - targetSum) in sums:
+                res += sums[(total - targetSum)]
             
-            dfs(node.left, path, total)
-            dfs(node.right, path, total)
+            sums[total] = sums.get(total, 0) + 1
 
-            path.pop()
+            dfs(node.left, total)
+            dfs(node.right, total)
+
+            sums[total] -= 1
         
-        dfs(root, [], 0)
+        dfs(root, 0)
 
         return res
+            
+
