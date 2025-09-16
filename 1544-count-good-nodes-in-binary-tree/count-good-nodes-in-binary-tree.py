@@ -7,21 +7,19 @@
 class Solution:
     def goodNodes(self, root: TreeNode) -> int:
         res = 0
-        def dfs(node, path):
+
+        def dfs(node, currMax):
             nonlocal res
             if not node:
-                return
-
-            if not path or max(path) <= node.val:
-                res += 1
+                return 
             
-            path.append(node.val)
+            if currMax <= node.val:
+                res += 1
+                currMax = node.val
 
-            dfs(node.left, path)
-            dfs(node.right, path)
+            dfs(node.left, currMax)
+            dfs(node.right, currMax)
 
-            path.pop()
-        
-        dfs(root, [])
+        dfs(root, root.val)
 
         return res
