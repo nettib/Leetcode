@@ -6,12 +6,18 @@
 #         self.right = right
 class Solution:
     def searchBST(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
+        #Base_case
         if not root:
             return None
-            
-        if root.val == val:
-            return root
-        elif root.val < val:
+        
+        #Recurrence Relation
+        if root.val < val:
             return self.searchBST(root.right, val)
-        else:
+        elif root.val > val:
             return self.searchBST(root.left, val)
+        else:
+            return root 
+
+        
+        
+        
