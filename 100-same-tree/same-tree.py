@@ -9,11 +9,7 @@ class Solution:
             if not p and not q:
                 return True
             
-            if not p and q:
-                return False
-            elif p and not q:
-                return False
-            elif p.val != q.val:
+            if not p or not q or p.val != q.val:
                 return False
             
             return (self.isSameTree(p.left, q.left) and
