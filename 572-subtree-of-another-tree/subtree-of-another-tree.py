@@ -5,27 +5,20 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
-        def sameTree(node, subNode):
+    def sameTree(self, node, subNode):
             if not node and not subNode:
                 return True
             
             if node and subNode and node.val == subNode.val:
-                return (sameTree(node.left, subNode.left) and
-                        sameTree(node.right, subNode.right))
-            else:
-                return False
-        
-
-        def check(node, subNode):
-            if not node:
+                return (self.sameTree(node.left, subNode.left) and
+                        self.sameTree(node.right, subNode.right))
+            return False
+    def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
+            if not root:
                 return False
             
-            if node.val == subNode.val:
-                if sameTree(node, subNode):
-                    return sameTree(node, subNode)
+            if root.val == subRoot.val and self.sameTree(root, subRoot):
+                return True
             
-            return (check(node.left, subNode) or 
-                    check(node.right, subNode))
-        
-        return check(root, subRoot)
+            return (self.isSubtree(root.left, subRoot) or 
+                    self.isSubtree(root.right, subRoot))
