@@ -12,8 +12,8 @@ class Solution:
         if not root:
             return
         
-        self.flatten(root.left)
         self.flatten(root.right)
+        self.flatten(root.left)
 
         tempRight = root.right
 
