@@ -15,19 +15,14 @@ class Solution:
         self.flatten(root.left)
         self.flatten(root.right)
 
-        if root.left:
-            temp = root.right
-            root.right = root.left
-            root.left = None
+        temp = root.right
+        root.right = root.left
+        root.left = None
 
-            curr = root.right
+        curr = root
 
-            while curr and curr.right:
-                curr = curr.right
-            
-            if curr:
-                curr.right = temp
-            else:
-                curr = temp
-
-        return root
+        while curr.right:
+            curr = curr.right
+        
+        curr.right = temp
+       
