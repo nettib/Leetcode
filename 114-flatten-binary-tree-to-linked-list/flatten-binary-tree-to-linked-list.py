@@ -12,17 +12,22 @@ class Solution:
         if not root:
             return
         
-        self.flatten(root.right)
         self.flatten(root.left)
+        self.flatten(root.right)
 
-        tempRight = root.right
+        if root.left:
+            temp = root.right
+            root.right = root.left
+            root.left = None
 
-        root.right = root.left
-        root.left = None
+            curr = root.right
 
-        curr = root
-        while curr.right:
-            curr = curr.right
-        
-        curr.right = tempRight
-        
+            while curr and curr.right:
+                curr = curr.right
+            
+            if curr:
+                curr.right = temp
+            else:
+                curr = temp
+
+        return root
