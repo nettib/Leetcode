@@ -5,17 +5,18 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-     # Getting the minimum value from the BST
-    def getMinValBst(self, root):
-        curr = root
-        while curr and curr.left:
-            curr = curr.left
-        return curr
-    def deleteNode(self, root: Optional[TreeNode], key: int) -> Optional[TreeNode]:
+    # function to get the min value from the right subtree
+    def getMinValue(self, node):
+        curr = node
 
-        #delete a node in BST
+        while curr.left:
+            curr = curr.left
+        
+        return curr
+        
+    def deleteNode(self, root: Optional[TreeNode], key: int) -> Optional[TreeNode]:
         if not root:
-            return None
+            return
         
         if root.val < key:
             root.right = self.deleteNode(root.right, key)
@@ -27,12 +28,12 @@ class Solution:
             elif not root.right:
                 return root.left
             else:
-                print(root.val)
-                node = self.getMinValBst(root.right)
-                root.val = node.val
-                print(node.val)
-                root.right = self.deleteNode(root.right, node.val)
+                temp = self.getMinValue(root.right)
+                root.val = temp.val
+
+                root.right = self.deleteNode(root.right, temp.val)
+        
         return root
-	
+
 
         
