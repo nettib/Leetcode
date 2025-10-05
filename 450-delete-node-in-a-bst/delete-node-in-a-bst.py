@@ -5,23 +5,19 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    # function to get the min value from the right subtree
     def getMinValue(self, node):
         curr = node
-
         while curr.left:
             curr = curr.left
-        
         return curr
-        
     def deleteNode(self, root: Optional[TreeNode], key: int) -> Optional[TreeNode]:
         if not root:
             return
         
-        if root.val < key:
-            root.right = self.deleteNode(root.right, key)
-        elif root.val > key:
+        if key < root.val:
             root.left = self.deleteNode(root.left, key)
+        elif key > root.val:
+            root.right = self.deleteNode(root.right, key)
         else:
             if not root.left:
                 return root.right
@@ -30,10 +26,6 @@ class Solution:
             else:
                 temp = self.getMinValue(root.right)
                 root.val = temp.val
-
                 root.right = self.deleteNode(root.right, temp.val)
-        
         return root
-
-
         
