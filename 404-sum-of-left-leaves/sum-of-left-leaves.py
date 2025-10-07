@@ -4,20 +4,21 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+from collections import deque
 class Solution:
     def sumOfLeftLeaves(self, root: Optional[TreeNode]) -> int:
         total = 0
+        q = deque([[root, None]])
 
-        def dfs(node, mark):
-            nonlocal total
-            if not node:
-                return 
-            
+        while q:
+            node, mark = q.popleft()
+
             if mark == "l" and not node.left and not node.right:
                 total += node.val
             
-            dfs(node.left, "l")
-            dfs(node.right, "r")
+            if node.left:
+                q.append([node.left, "l"])
+            if node.right:
+                q.append([node.right, "r"])
         
-        dfs(root, None)
         return total
