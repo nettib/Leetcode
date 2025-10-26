@@ -1,23 +1,18 @@
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
         res = []
-        comb = []
 
-        def backtrack(start, combSum):
-            if combSum == target:
-                res.append(comb.copy())
+        def backtrack(i, path, total):
+            if total == target:
+                res.append(path[:])
+                return
+            if i >= len(candidates) or total > target:
                 return
             
-            if combSum > target:
-                return
-            
-            for i in range(start, len(candidates)):
-                comb.append(candidates[i])
-                combSum += candidates[i]
-                backtrack(i, combSum)
-                val = comb.pop()
-                combSum -= val
+            path.append(candidates[i])
+            backtrack(i, path, total + candidates[i])
+            path.pop()
+            backtrack(i + 1, path, total)
         
-        backtrack(0, 0)
+        backtrack(0, [], 0)
         return res
-        
