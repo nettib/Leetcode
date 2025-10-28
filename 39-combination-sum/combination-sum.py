@@ -6,9 +6,9 @@ class Solution:
             if total == target:
                 res.append(path[:])
                 return
-            if i >= len(candidates) or total > target:
+            if total > target or i == len(candidates):
                 return
-            
+
             path.append(candidates[i])
             backtrack(i, path, total + candidates[i])
             path.pop()
