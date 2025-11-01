@@ -16,16 +16,14 @@ class Solution(object):
         head1 = head
         prev = None
         while curr:
-            if head1.val in numsSet:
-                temp = head1.next
-                head1.next = None
-                head1 = temp
-                curr = head1
-            elif curr.val in numsSet:
+            if curr.val in numsSet:
                 temp = curr.next
                 curr.next = None
+                if head1 == curr:
+                    head1 = temp
                 curr = temp
-                prev.next = curr
+                if prev:
+                    prev.next = curr
             else:
                 prev = curr
                 curr = curr.next
