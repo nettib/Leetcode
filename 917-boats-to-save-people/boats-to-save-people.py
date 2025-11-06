@@ -14,12 +14,11 @@ class Solution(object):
                 boats += 1
                 break
             
+            boats += 1
             if people[l] + people[r] <= limit:
-                boats += 1
                 l += 1
                 r -= 1
             else:
-                boats += 1
                 r -= 1
         
         return boats
