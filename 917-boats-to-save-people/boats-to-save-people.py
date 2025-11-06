@@ -1,16 +1,25 @@
-class Solution:
-    def numRescueBoats(self, people: List[int], limit: int) -> int:
+class Solution(object):
+    def numRescueBoats(self, people, limit):
+        """
+        :type people: List[int]
+        :type limit: int
+        :rtype: int
+        """
         people.sort()
-        boat = 0
         l, r = 0, len(people) - 1
+        boats = 0
+
         while l <= r:
             if l == r:
-                boat += 1
-                return boat
-            weight = people[l] + people[r]
-            if weight <= limit:
+                boats += 1
+                break
+            
+            if people[l] + people[r] <= limit:
+                boats += 1
                 l += 1
-            boat += 1
-            r -= 1
+                r -= 1
+            else:
+                boats += 1
+                r -= 1
         
-        return boat
+        return boats
