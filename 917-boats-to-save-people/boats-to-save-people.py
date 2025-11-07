@@ -5,16 +5,15 @@ class Solution(object):
         :type limit: int
         :rtype: int
         """
-        people.sort()
+        people.sort() #O(nlog(n))
+
         l, r = 0, len(people) - 1
         boats = 0
 
-        while l < r:
-            boats += 1
+        while l <= r:
             if people[l] + people[r] <= limit:
                 l += 1
-                r -= 1
-            else:
-                r -= 1
-        
-        return boats if l != r else boats + 1
+            boats += 1
+            r -= 1
+
+        return boats + 1 if l == r else boats
