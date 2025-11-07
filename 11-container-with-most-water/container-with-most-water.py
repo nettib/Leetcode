@@ -4,6 +4,7 @@ class Solution(object):
         :type height: List[int]
         :rtype: int
         """
+        
         l, r = 0, len(height) - 1
         water = 0
 
@@ -11,7 +12,7 @@ class Solution(object):
             area = (r - l) * min(height[l], height[r])
             water = max(water, area)
 
-            if height[l] < height[r]:
+            if height[l] <= height[r]:
                 l += 1
             else:
                 r -= 1
