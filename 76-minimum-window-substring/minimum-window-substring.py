@@ -1,28 +1,45 @@
-class Solution:
-    def minWindow(self, s: str, t: str) -> str:
-        s_hash = {}
-        t_hash = {}
+class Solution(object):
+    def minWindow(self, s, t):
+        """
+        :type s: str
+        :type t: str
+        :rtype: str
+        """
+        sHash = {}
+        tHash = {}
 
-        for char in t:
-            t_hash[char] = t_hash.get(char, 0) + 1
-
-        have, need = 0, len(t_hash)
-        res = None
+        for i in range(len(t)):
+            tHash[t[i]] = tHash.get(t[i], 0) + 1
+            if t[i] not in sHash:
+                sHash[t[i]] = 0
+        
+        have = 0
+        need = len(tHash)
+        minSub = [0, float("inf")]
 
         l = 0
         for r in range(len(s)):
-            if s[r] in t_hash:
-                s_hash[s[r]] = s_hash.get(s[r], 0) + 1
-                if s_hash[s[r]] == t_hash[s[r]]:
+            if s[r] in sHash:
+                sHash[s[r]] += 1
+                if sHash[s[r]] == tHash[s[r]]:
                     have += 1
-                while have == need:
-                    if res == None or len(s[l:r + 1]) < len(res):
-                        res = s[l:r + 1]
-                    if s[l] in s_hash:
-                        s_hash[s[l]] -= 1
-                        if s_hash[s[l]] < t_hash[s[l]]:
-                            have -= 1
-                    l += 1
+            
+            while l <= r and have == need:
+                if (minSub[-1] - minSub[0]) > (r - l):
+                    minSub[-1], minSub[0] = r, l
+                
+                if s[l] in sHash:
+                    sHash[s[l]] -= 1
+                    if sHash[s[l]] < tHash[s[l]]:
+                        have -= 1
+                
+                l += 1
+        
+        if minSub[-1] == float("inf"):
+            return ""
+        
+        return s[minSub[0]: minSub[-1] + 1]
 
-        return res if res else ""
+                
 
+        
