@@ -1,15 +1,23 @@
-class Solution:
-    def longestOnes(self, nums: List[int], k: int) -> int:
-        max_ones = 0
-        flag = 0
+class Solution(object):
+    def longestOnes(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: int
+        """
+
+        track = { 0: 0, 1: 0 }
         l = 0
+        maxLen = 0
+
         for r in range(len(nums)):
-            if nums[r] == 0:
-                flag += 1
-            while flag > k:
-                if nums[l] == 0:
-                    flag -= 1
+            track[nums[r]] += 1
+
+            while l <= r and track[0] > k:
+                track[nums[l]] -= 1
                 l += 1
-            max_ones = max(max_ones, r - l + 1)
+            
+            maxLen = max(maxLen, r - l + 1)
         
-        return max_ones
+        return maxLen
+        
