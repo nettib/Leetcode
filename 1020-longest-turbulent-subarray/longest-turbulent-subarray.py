@@ -4,36 +4,25 @@ class Solution(object):
         :type arr: List[int]
         :rtype: int
         """
-        n = len(arr)
-        if n == 1:
-            return 1
-
         def flagSwitch(prev, curr):
-            if prev > curr:
-                return -1
-            elif prev < curr:
+            if prev < curr:
                 return 1
+            elif prev > curr:
+                return -1
             return 0
 
-        maxLen = 1  # At least one element
+        maxLen = 1
         l = 0
-        flag = 0  # No flag initially
+        flag = None
 
-        for r in range(1, n):
+        for r in range(1, len(arr)):
             flagR = flagSwitch(arr[r - 1], arr[r])
-
             if flagR == 0:
-                l = r  # Reset window when equal elements
-            elif r == 1 or flag * flagR == -1:
-                # turbulent continues
-                maxLen = max(maxLen, r - l + 1)
-            else:
-                # same sign, start new window
+                l = r
+                flag = None
+            if (flag and flagR == flag):
                 l = r - 1
-                maxLen = max(maxLen, r - l + 1)
-
-            flag = flagR  # Always update flag
+            maxLen = max(maxLen, r - l + 1)
+            flag = flagR
 
         return maxLen
-
-
