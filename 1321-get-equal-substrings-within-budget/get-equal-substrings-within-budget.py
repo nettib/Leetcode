@@ -1,16 +1,23 @@
-class Solution:
-    def equalSubstring(self, s: str, t: str, maxCost: int) -> int:
-        cost = 0
-        max_len = 0
-
+class Solution(object):
+    def equalSubstring(self, s, t, maxCost):
+        """
+        :type s: str
+        :type t: str
+        :type maxCost: int
+        :rtype: int
+        """
         l = 0
-        for r in range(len(s)):
-            cost += abs(ord(s[r]) - ord(t[r]))
+        maxLen = 0
+        currCost = 0
 
-            while cost > maxCost:
-                cost -= abs(ord(s[l]) - ord(t[l]))
+        for r in range(len(s)):
+            currCost += abs(ord(s[r]) - ord(t[r]))
+
+            while l <= r and currCost > maxCost:
+                currCost -= abs(ord(s[l]) - ord(t[l]))
                 l += 1
             
-            max_len = max(max_len, r - l + 1)
+            if l <= r:
+                maxLen = max(maxLen, r - l + 1)
         
-        return max_len
+        return maxLen
