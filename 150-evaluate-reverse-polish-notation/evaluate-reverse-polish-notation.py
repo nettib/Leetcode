@@ -1,18 +1,19 @@
 class Solution:
     def evalRPN(self, tokens: List[str]) -> int:
-        operators = ['+', '-', '*', '/']
-        stack = []
+        ops_match = {
+                        '+': lambda a, b: a + b, 
+                        '-': lambda a, b: a - b, 
+                        '*': lambda a, b: a * b, 
+                        '/': lambda a, b: a / b
+                    }
+        nums = []
 
-        for char in tokens:
-            val1 = 0
-            val2 = 0
-            if char not in operators:
-                stack.append(char)
+        for i in range(len(tokens)):
+            if tokens[i] in ops_match:
+                val2 = int(nums.pop())
+                val1 = int(nums.pop())
+                nums.append(ops_match[tokens[i]](val1, val2))
             else:
-                val2 = stack.pop()
-                val1 = stack.pop()
-                stack.append(str(int(eval(val1 + char + val2))))
-            
-        return int(stack[-1])
-
-
+                nums.append(tokens[i])
+        
+        return int(nums[-1])
