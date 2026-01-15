@@ -9,22 +9,19 @@ class Solution:
     def widthOfBinaryTree(self, root: Optional[TreeNode]) -> int:
         if not root:
             return 0
-
-        maxWidth = 0
-
+        maxwidth = 0
         q = deque([[root, 1]])
+
         while q:
-            fp = q[0][1]
-            lp = q[-1][1]
-            maxWidth = max(maxWidth, lp - fp + 1)
-
-            qLen = len(q)
-            for _ in range(qLen):
-                node, index = q.popleft()
-
+            first = q[0][-1]
+            last = None
+            for _ in range(len(q)):
+                node, pos = q.popleft()
+                last = pos
                 if node.left:
-                    q.append([node.left, 2 * index])
+                    q.append([node.left, 2 * pos])
                 if node.right:
-                    q.append([node.right, 2 * index + 1])
+                    q.append([node.right, 2 * pos + 1])
+            maxwidth = max(maxwidth, last - first + 1)
         
-        return maxWidth
+        return maxwidth
