@@ -1,21 +1,26 @@
 class Solution:
     def frequencySort(self, s: str) -> str:
-        track = {}
+        s_hash = {}
+        freq_hash = {}
+        ans = ""
 
         for char in s:
-            track[char] = track.get(char, 0) + 1
+            s_hash[char] = s_hash.get(char, 0) + 1
         
-        track1 = defaultdict(list)
         
-        for char in track.keys():
-            val = track[char]
-            track1[val].append(char)
+        for char in s_hash.keys():
+            freq = s_hash[char]
+
+            if freq not in freq_hash:
+                freq_hash[freq] = [char]
+            else:
+                freq_hash[freq].append(char)
         
-        # print(track1)
-        
-        ans = ""
-        for freq in sorted(track1)[::-1]:
-            for char in track1[freq]:
-                ans += (char * freq)
-        
+        for freq in sorted(freq_hash.keys())[::-1]:
+            for char in freq_hash[freq]:
+                ans += freq * char
+
         return ans
+
+
+
