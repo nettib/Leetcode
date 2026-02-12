@@ -1,31 +1,21 @@
 class Solution:
     def imageSmoother(self, img: List[List[int]]) -> List[List[int]]:
-        res = [[0] * len(img[0]) for _ in range(len(img))]
+        # m * n * 9
 
-        def checkrow(row):
-            if row >= 0 and row < len(img):
-                return True
-            return False
-        
-        def checkcol(col):
-            if col >= 0 and col < len(img[0]):
-                return True
-            return False
+        rows, cols = len(img), len(img[0])
 
-        for r in range(len(img)):
-            for c in range(len(img[0])):
-                total = 0
-                count = 0
-                for i in range(r  - 1, r + 2):
-                    if checkrow(i):
-                        for j in range(c - 1, c + 2):
-                            if checkcol(j):
-                                total += img[i][j]
-                                count += 1
-            
-                res[r][c] = total // count
-        
-        return res
+        out = [[0] * cols for _ in range(rows)]
 
+        for r in range(rows):
+            for c in range(cols):
+                _count = 0
+                _sum = 0
+                # process the _count and _sum
 
+                for new_row in range(max(0, r - 1), min(rows, r + 2)):
+                    for new_col in range(max(0, c - 1), min(cols, c + 2)):
+                        _count += 1
+                        _sum += img[new_row][new_col]
 
+                out[r][c] = _sum // _count
+        return out
