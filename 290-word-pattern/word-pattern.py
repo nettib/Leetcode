@@ -1,21 +1,21 @@
 class Solution:
     def wordPattern(self, pattern: str, s: str) -> bool:
-        splitted_str = s.split(" ")
+        word_letter_match = {}
+        word_set = set()
 
-        if len(pattern) != len(splitted_str):
+        s_list = s.split(" ")
+
+        
+        if len(pattern) != len(s_list):
             return False
 
-        matchS1 = {}
-        matchS2 = {}
-
         for i in range(len(pattern)):
-            if pattern[i] in matchS1 and matchS1[pattern[i]] != splitted_str[i]:
+            if pattern[i] in word_letter_match and word_letter_match[pattern[i]] != s_list[i]:
                 return False
-            matchS1[pattern[i]] = splitted_str[i]
-
-        for i in range(len(splitted_str)):
-            if splitted_str[i] in matchS2 and matchS2[splitted_str[i]] != pattern[i]:
+            elif pattern[i] not in word_letter_match and s_list[i] in word_set:
                 return False
-            matchS2[splitted_str[i]] = pattern[i]
-
+            else:
+                word_letter_match[pattern[i]] = s_list[i]
+                word_set.add(s_list[i])
+            
         return True
