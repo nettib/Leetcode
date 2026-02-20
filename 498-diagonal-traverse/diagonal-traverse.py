@@ -1,24 +1,22 @@
 class Solution:
     def findDiagonalOrder(self, mat: List[List[int]]) -> List[int]:
-        track = defaultdict(list)
+        track = {}
+        ans = []
 
         for r in range(len(mat)):
             for c in range(len(mat[0])):
-                s = r + c
-                track[s].append(mat[r][c])
-        
-        print(track)
-        ans = []
+                if r + c not in track:
+                    track[r + c] = []
+                track[r + c].append(mat[r][c])
 
-        size = len(mat) + len(mat[0]) - 1
         flag = 1
-
-        for s in range(size):
+        for val in track.values():
             if flag:
-                ans.extend(track[s][::-1])
+                ans.extend(val[::-1])
                 flag = 0
             else:
-                ans.extend(track[s])
+                ans.extend(val)
                 flag = 1
         
         return ans
+# [1,2,4,7,5,3,6,8,9]
