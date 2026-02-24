@@ -1,19 +1,19 @@
-class Solution(object):
-    def numRescueBoats(self, people, limit):
-        """
-        :type people: List[int]
-        :type limit: int
-        :rtype: int
-        """
-        people.sort() #O(nlog(n))
+class Solution:
+    def numRescueBoats(self, people: List[int], limit: int) -> int:
+        people.sort()
 
-        l, r = 0, len(people) - 1
         boats = 0
+        l, r = 0, len(people) - 1
 
         while l <= r:
-            if people[l] + people[r] <= limit:
+            if l == r:
+                boats += 1
+                break
+            elif people[l] + people[r] <= limit:
                 l += 1
+                r -= 1
+            else:
+                r -= 1
             boats += 1
-            r -= 1
-
-        return boats + 1 if l == r else boats
+        
+        return boats
