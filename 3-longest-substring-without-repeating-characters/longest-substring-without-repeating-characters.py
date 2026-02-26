@@ -1,21 +1,16 @@
-class Solution(object):
-    def lengthOfLongestSubstring(self, s):
-        """
-        :type s: str
-        :rtype: int
-        """
-        track = set()
-        maxSub = 0
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        unique = Counter()
+        
+        maxLen = 0
         l = 0
 
         for r in range(len(s)):
-
-            while s[r] in track:
-                if s[l] in track:
-                    track.remove(s[l])
+            while unique[s[r]] > 0:
+                unique[s[l]] -= 1
                 l += 1
+            unique[s[r]] += 1
 
-            track.add(s[r])
-            maxSub = max(maxSub, r - l + 1)
+            maxLen = max(maxLen, r - l + 1)
         
-        return maxSub
+        return maxLen
