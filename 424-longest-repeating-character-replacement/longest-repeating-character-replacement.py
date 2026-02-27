@@ -1,23 +1,16 @@
-class Solution(object):
-    def characterReplacement(self, s, k):
-        """
-        :type s: str
-        :type k: int
-        :rtype: int
-        """
-        track = {}
-        maxF = -float("inf")
-        longChar = -float("inf")
+class Solution:
+    def characterReplacement(self, s: str, k: int) -> int:
+        s_count = defaultdict(int)
+        longest = 0
+
         l = 0
-
         for r in range(len(s)):
-            track[s[r]] = track.get(s[r], 0) + 1
-            maxF = max(maxF, track[s[r]])
-
-            while (r - l) - maxF >= k:
-                track[s[l]] -= 1
-                l += 1
+            s_count[s[r]] += 1
             
-            longChar = max(longChar, r - l + 1)
+            while (sum(s_count.values()) - max(s_count.values())) > k:
+                s_count[s[l]] -= 1
+                l += 1
+
+            longest = max(longest, r - l + 1)
         
-        return longChar
+        return longest
