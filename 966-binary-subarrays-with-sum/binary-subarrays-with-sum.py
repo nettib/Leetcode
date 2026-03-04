@@ -1,18 +1,20 @@
 class Solution:
     def numSubarraysWithSum(self, nums: List[int], goal: int) -> int:
-        track = {0: 1}
+        def sliding_window(nums, goal):
+            count = 0
 
-        ans = 0
-        curr = 0
-        for i in range(len(nums)):
-            curr += nums[i]
+            curr = 0
+            l = 0
+            for r in range(len(nums)):
+                curr += nums[r]
 
-            if curr - goal in track:
-                ans += track[curr - goal]
+                while l < r and curr > goal:
+                    curr -= nums[l]
+                    l += 1
+                
+                if curr <= goal:
+                    count += (r - l + 1)
             
-            if curr not in track:
-                track[curr] = 0
+            return count
             
-            track[curr] += 1
-        
-        return ans
+        return sliding_window(nums, goal) - sliding_window(nums, goal - 1)
