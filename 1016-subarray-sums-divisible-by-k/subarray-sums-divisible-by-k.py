@@ -1,15 +1,18 @@
 class Solution:
     def subarraysDivByK(self, nums: List[int], k: int) -> int:
-        count = {0: 1}
-        res = 0
+        track = {0: 1}
 
-        prefix = 0
+        count = 0
+        curr = 0
         for i in range(len(nums)):
-            prefix += nums[i]
-            rem = prefix % k
-            if rem in count:
-                res += count[rem]
-            count[rem] = count.get(rem, 0) + 1
+            curr += nums[i]
 
-        return res
-                
+            cand = curr % k
+
+            if cand in track:
+                count += track[cand]
+            else:
+                track[cand] = 0
+            track[cand] += 1
+        
+        return count
