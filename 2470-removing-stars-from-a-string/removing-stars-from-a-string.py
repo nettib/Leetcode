@@ -3,9 +3,10 @@ class Solution:
         stack = []
 
         for char in s:
-            if char == "*":
-                stack.pop()
-            else:
+            if char != '*':
                 stack.append(char)
+            else:
+                if stack:
+                    stack.pop()
         
         return "".join(stack)
