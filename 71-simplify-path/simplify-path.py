@@ -1,13 +1,13 @@
 class Solution:
-    # ['', 'home', 'user', '', '', 'Documents', '..', 'Pictures']
     def simplifyPath(self, path: str) -> str:
-        hold = path.split("/")
-        stack = []
+        simple_path = path.split("/")
 
-        for char in hold:
-            if len(stack) != 0 and char == '..':
-                stack.pop()
-            elif len(char) != 0 and char != "." and char != "..":
-                stack.append(char)
+        simplified_Path = []
 
-        return "/" + "/".join(stack)
+        for p in simple_path:
+            if simplified_Path and p == "..":
+                simplified_Path.pop()
+            elif p and p != '.' and p != "..":
+                simplified_Path.append(p)
+        
+        return "/" + "/".join(simplified_Path)
