@@ -6,24 +6,33 @@
 #         self.right = right
 class Solution:
     def pathSum(self, root: Optional[TreeNode], targetSum: int) -> int:
-        pathCount = 0
-        trackSum = { 0: 1 }
-
-        def dfs(node, total):
-            nonlocal pathCount
+        track = {0: 1}
+        count = 0
+    
+        def dfs(node, _sum, targetSum):
+            nonlocal count
             if not node:
-                return
-            
-            total += node.val
+                return 
 
-            if (total - targetSum) in trackSum:
-                pathCount += trackSum[(total - targetSum)]
+            _sum += node.val
+            if _sum - targetSum in track:
+                count += (track[_sum - targetSum])
             
-            trackSum[total] = trackSum.get(total, 0) + 1
+            if _sum not in track:
+                track[_sum] = 0
+            track[_sum] += 1
             
-            dfs(node.left, total)
-            dfs(node.right, total)
-            trackSum[total] -= 1
+            dfs(node.left, _sum, targetSum)
+            dfs(node.right, _sum, targetSum)
+            track[_sum] -= 1
+        
+        dfs(root, 0, targetSum)
+        return count
 
-        dfs(root, 0)
-        return pathCount
+
+
+
+
+
+
+        
