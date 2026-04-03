@@ -1,21 +1,23 @@
 class Solution:
     def hIndex(self, citations: List[int]) -> int:
-        l, r = 0, len(citations) - 1
-        hindex = 0
+        def check(h, citations):
+            l, r = 0, len(citations) - 1
+            while l <= r:
+                m = l + ((r - l) // 2)
+                if citations[m] >= h:
+                    r = m - 1
+                else:
+                    l = m + 1
+            
+            return len(citations) - l >= h
+
+        l, r = 0, max(citations)
 
         while l <= r:
             m = l + ((r - l) // 2)
-            count = len(citations) - m
-            if count >= citations[m]:
-                hindex = max(hindex, citations[m])
+            if check(m, citations):
                 l = m + 1
             else:
-                if count <= citations[m]:
-                    hindex = max(hindex, count)
                 r = m - 1
         
-        
-        return hindex
-
-
-    
+        return r
