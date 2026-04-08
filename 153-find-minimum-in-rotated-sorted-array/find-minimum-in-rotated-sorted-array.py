@@ -10,3 +10,6 @@ class Solution:
                 r = m
         
         return nums[l]
+
+# [3, 1, 2]
+#     m
