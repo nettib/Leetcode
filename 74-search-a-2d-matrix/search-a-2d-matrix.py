@@ -1,28 +1,31 @@
 class Solution:
     def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
-        rows = len(matrix)
-        columns = len(matrix[0])
-        l, r = 0, rows - 1
+        def bs(mat, target):
+            l, r = 0, len(mat) - 1
+            while l <= r:
+                m = l + ((r - l) // 2)
+                if mat[m] == target:
+                    return True
+                elif mat[m] < target:
+                    l = m + 1
+                else:
+                    r = m -1
+                
+            return False
+        
+        l, r = 0, len(matrix) - 1
 
-        while l <= r:
+        while l < r:
             m = l + ((r - l) // 2)
-            if target >= matrix[m][0] and target <= matrix[m][columns - 1]:
-                l1, r1 = 0, columns - 1
-                while l1 <= r1:
-                    m1 = l1 + ((r1 - l1) // 2)
-                    if matrix[m][m1] == target:
-                        return True
-                    elif matrix[m][m1] < target:
-                        l1 = m1 + 1
-                    else:
-                        r1 = m1 - 1
-                return False
-            elif target < matrix[m][0]:
+            if target < matrix[m][0]:
                 r = m - 1
-            else:
+            elif target > matrix[m][-1]:
                 l = m + 1
-         
-        return False
-
-
+            else:
+                l = m
+                r = m
             
+        if l == r:
+            return bs(matrix[l], target)
+        
+        return False
