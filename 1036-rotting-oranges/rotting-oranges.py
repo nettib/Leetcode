@@ -7,7 +7,7 @@ class Solution:
             return 0 <= r < len(grid) and 0 <= c < len(grid[0])
         
         rotten = []
-
+        
         for r in range(len(grid)):
             for c in range(len(grid[0])):
                 if grid[r][c] == 2:
