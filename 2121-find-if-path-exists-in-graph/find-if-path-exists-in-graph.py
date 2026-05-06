@@ -7,18 +7,16 @@ class Solution:
             graph[u].append(v)
             graph[v].append(u)
         
-        stack = [source]
-        visited = set([source])
-
-        while stack:
-            node = stack.pop()
-
+        visited = set()
+        def dfs(node):
             if node == destination:
                 return True
 
-            for neighbour in graph[node]:
-                if neighbour not in visited:
-                    stack.append(neighbour)
-                    visited.add(neighbour)
-
-        return False
+            visited.add(node)
+            for nei in graph[node]:
+                if nei in visited: continue
+                if dfs(nei): return True
+            
+            return False
+        
+        return dfs(source)
