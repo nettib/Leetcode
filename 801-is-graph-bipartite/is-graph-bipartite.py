@@ -1,35 +1,31 @@
+from collections import defaultdict
 class Solution:
     def isBipartite(self, graph: List[List[int]]) -> bool:
-        # Coloring
-        color = [0] * len(graph)
-
+        colors = [0] * len(graph)
+        
         visited = set()
+        
         def dfs(node):
-            
-            visited.add(node)
-            for neighbor in graph[node]:
-                if neighbor not in visited:
-                    if color[node] == "B":
-                        color[neighbor] = "W"
-                    else:
-                        color[neighbor] = "B"
-                    dfs(neighbor)
-        
-        for node in range(len(graph)):
-            if color[node] == 0:
-                color[node] = "B"
-                dfs(node)
-        
-        # checking if the graph is bipartite or not
-        for node in range(len(graph)):
-            c = color[node]
-            for neighbor in graph[node]:
-                if color[neighbor] == c:
+
+            for nei in graph[node]:
+                if nei in visited: 
+                    if colors[node] == colors[nei]: return False
+                    continue
+                visited.add(nei)
+                if colors[node] == 'B':
+                    colors[nei] = 'W'
+                else:
+                    colors[nei] = 'B'
+                if not dfs(nei):
                     return False
+            return True
+        
+        for node in range(len(graph)):
+            if node in visited: continue
+            visited.add(node)
+            colors[node] = 'B'
+            if not dfs(node): return False
         
         return True
-                
 
 
-
-                
