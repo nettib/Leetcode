@@ -19,5 +19,6 @@ class Solution:
 
             return max(l, r) + 1
         
-        return max(dfs(root) - 1, diameter)
+        dfs(root)
+        return diameter
 
