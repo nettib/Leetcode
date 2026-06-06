@@ -1,37 +1,42 @@
-from collections import defaultdict
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        graph = defaultdict(list)
+        # 0 = "WHITE", 1 = "GRAY", 2 = "BLACK"
+        
+        courses = defaultdict(list)
+        colors = [0] * numCourses
 
         for c1, c2 in prerequisites:
-            graph[c2].append(c1)
+            courses[c2].append(c1)
         
-        color = [0] * numCourses
-        # 0 - white, 1 - gray, 2 - black
         visited = set()
-        def dfs(node):
-
-            for nei in graph[node]:
+        def dfs(course):
+            
+            for nei in courses[course]:
                 if nei in visited:
-                    if color[nei] == 1:
+                    if colors[nei] == 1:
                         return False
                     continue
-                color[nei] = 1
+                colors[nei] = 1
                 visited.add(nei)
                 if not dfs(nei):
                     return False
-                
-            color[node] = 2
+            colors[course] = 2
             return True
         
-        for c in range(numCourses):
-            color[c] = 1
-            visited.add(c)
-            if not dfs(c):
-                return False
+        for course in range(numCourses):
+            if course not in visited:
+                colors[course] = 1
+                visited.add(course)
+                if not dfs(course):
+                    return False
         
         return True
-
-
-
         
+
+
+
+
+
+# Synced seamlessly with LeetHub Pro
+# Pro features: https://bit.ly/leethubpro | Free version: https://bit.ly/leethubv4
+# Get it here: https://chromewebstore.google.com/detail/leethub-v4/bcilpkkbokcopmabingnndookdogmbna
