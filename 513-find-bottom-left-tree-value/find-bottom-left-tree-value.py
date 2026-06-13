@@ -4,22 +4,26 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
-from collections import deque
 class Solution:
     def findBottomLeftValue(self, root: Optional[TreeNode]) -> int:
-        q = deque([root])
-        leftmost = None
-
-        while q:
-            qLen = len(q)
-            leftmost = q[0].val
-
-            for _ in range(qLen):
-                node = q.popleft()
-
-                if node.left:
-                    q.append(node.left)
-                if node.right:
-                    q.append(node.right)
+        ans = [root.val, 0]
+        def dfs(node, row):
+            nonlocal ans
+            if not node:
+                return None
+            
+            if row > ans[-1]:
+                ans = [node.val, row]
+            
+            if node.left:
+                dfs(node.left, row + 1)
+            if node.right:
+                dfs(node.right, row + 1)
         
-        return leftmost
+        dfs(root, 0)
+
+        return ans[0]
+
+# Synced seamlessly with LeetHub Pro
+# Pro features: https://bit.ly/leethubpro | Free version: https://bit.ly/leethubv4
+# Get it here: https://chromewebstore.google.com/detail/bcilpkkbokcopmabingnndookdogmbna
