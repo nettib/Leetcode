@@ -6,19 +6,31 @@
 #         self.right = right
 class Solution:
     def sumNumbers(self, root: Optional[TreeNode]) -> int:
-        allPathSum = 0
+        ans = 0
+        paths = []
+        def dfs(node, path):
+            nonlocal ans
 
-        def dfs(node, track):
-            nonlocal allPathSum
-            if not node:
-                return
-            
-            track += str(node.val)
+            path.append(node.val)
+
             if not node.left and not node.right:
-                allPathSum += int(track)
+                paths.append(path[:])
+                ans += int("".join(map(str, path)))
+                path.pop()
+                return
 
-            dfs(node.left, track)
-            dfs(node.right, track)
+            if node.left:
+                dfs(node.left, path)
+            if node.right:
+                dfs(node.right, path)
+
+            path.pop()
+
+        dfs(root, [])
+        print(paths)
+        return ans
         
-        dfs(root, "")
-        return allPathSum
+
+# Synced seamlessly with LeetHub Pro
+# Pro features: https://bit.ly/leethubpro | Free version: https://bit.ly/leethubv4
+# Get it here: https://chromewebstore.google.com/detail/bcilpkkbokcopmabingnndookdogmbna
