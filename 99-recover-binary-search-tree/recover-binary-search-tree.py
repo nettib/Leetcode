@@ -9,28 +9,31 @@ class Solution:
         """
         Do not return anything, modify root in-place instead.
         """
-        fswap = None
-        sswap = None
-        prev = TreeNode(float("-inf"))
-
+        first = None
+        second = None
+        prev = None
         def dfs(node):
-            nonlocal fswap, sswap, prev
+            nonlocal first, second, prev
             if not node:
-                return
+                return 
             
             dfs(node.left)
-
-            if prev.val > node.val:
-                if not fswap:
-                    fswap = prev
-                sswap = node
-            
+            #Do sth
+            if prev and prev.val > node.val:
+                if not first:
+                    first = prev
+                    second = node
+                second = node
             prev = node
-            
-            dfs(node.right)
 
-        dfs(root)
-        temp = fswap.val
-        fswap.val = sswap.val
-        sswap.val = temp
+
+            dfs(node.right)
         
+        dfs(root)
+
+        first.val, second.val = second.val, first.val
+        
+
+# Synced seamlessly with LeetHub Pro
+# Pro features: https://bit.ly/leethubpro | Free version: https://bit.ly/leethubv4
+# Get it here: https://chromewebstore.google.com/detail/bcilpkkbokcopmabingnndookdogmbna
