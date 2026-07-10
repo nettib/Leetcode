@@ -1,26 +1,28 @@
-from collections import defaultdict
 class Solution:
     def allPathsSourceTarget(self, graph: List[List[int]]) -> List[List[int]]:
-        adj = defaultdict(list)
+        
         ans = []
 
-        for node in range(len(graph)):
-            adj[node] = graph[node]
-        
-        path = []
-        def dfs(node):
+        def dfs(node, path):
+            
             path.append(node)
-
             if node == len(graph) - 1:
                 ans.append(path[:])
                 path.pop()
-                return
-            
-            for neighbor in adj[node]:
-                dfs(neighbor)
+                return 
+
+            for nei in graph[node]:
+                dfs(nei, path)
             
             path.pop()
-            
-        dfs(0)
+        
+        dfs(0, [])
 
         return ans
+
+
+
+
+# Synced seamlessly with LeetHub Pro
+# Pro features: https://bit.ly/leethubpro | Free version: https://bit.ly/leethubv4
+# Get it here: https://chromewebstore.google.com/detail/bcilpkkbokcopmabingnndookdogmbna
