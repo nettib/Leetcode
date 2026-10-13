@@ -4,21 +4,36 @@
 #         self.val = val
 #         self.next = next
 class Solution:
-    def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
-        dummy = ListNode()
+    def mergeTwoLists(self, list1: ListNode | None, list2: ListNode | None) -> ListNode | None:
+        head = ListNode()
+        head1 = list1
+        head2 = list2
 
-        curr = dummy
+        curr = head 
 
-        while list1 and list2:
-            if list1.val <= list2.val:
-                curr.next = list1
-                list1 = list1.next
+        while head1 and head2:
+            if head1.val < head2.val:
+                curr.next = head1
+                curr = head1
+                head1 = curr.next
+                curr.next = None
             else:
-                curr.next = list2
-                list2 = list2.next
-            curr = curr.next
+                curr.next = head2
+                curr = head2
+                head2 = curr.next
+                curr.next = None
         
-        curr.next = list1 or list2
- 
+        if head1:
+            curr.next = head1
         
-        return dummy.next 
+        if head2:
+            curr.next = head2
+        
+        return head.next
+
+
+        
+
+# Synced seamlessly with LeetHub Pro
+# Pro features: https://bit.ly/leethubpro | Free version: https://bit.ly/leethubv4
+# Get it here: https://chromewebstore.google.com/detail/bcilpkkbokcopmabingnndookdogmbna
