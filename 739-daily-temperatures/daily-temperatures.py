@@ -1,13 +1,21 @@
 class Solution:
-    def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
-        stack = []
-        ans = [0] * len(temperatures)
-
-        for i, temp in enumerate(temperatures):
-            while stack and stack[-1][-1] < temp:
-                last = stack.pop()
-                ans[last[0]] = i - last[0]
-            stack.append([i, temp])
+    def dailyTemperatures(self, t: list[int]) -> list[int]:
+        ans = [0] * len(t)
+        stack = [0]
         
-        return ans
+        
+        for i in range(1, len(t)):
 
+            while stack and t[stack[-1]] < t[i]:
+                idx = stack.pop()
+                ans[idx] = i - idx
+
+            stack.append(i)
+
+        return ans 
+
+
+
+# Synced seamlessly with LeetHub Pro
+# Pro features: https://bit.ly/leethubpro | Free version: https://bit.ly/leethubv4
+# Get it here: https://chromewebstore.google.com/detail/bcilpkkbokcopmabingnndookdogmbna
